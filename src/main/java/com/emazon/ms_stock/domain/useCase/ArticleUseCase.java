@@ -5,6 +5,7 @@ import com.emazon.ms_stock.domain.model.Article;
 import com.emazon.ms_stock.domain.spi.IArticlePersistencePort;
 
 import java.util.List;
+import java.util.Optional;
 
 public class ArticleUseCase implements IArticleServicePort {
 
@@ -15,8 +16,8 @@ public class ArticleUseCase implements IArticleServicePort {
     }
 
     @Override
-    public void saveArticle(Article article) {
-        articlePersistencePort.saveArticle(article);
+    public Article saveArticle(Article article) {
+        return articlePersistencePort.saveArticle(article);
     }
 
     @Override

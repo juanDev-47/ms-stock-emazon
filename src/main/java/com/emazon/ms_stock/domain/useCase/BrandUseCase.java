@@ -13,8 +13,9 @@ public class BrandUseCase implements IBrandServicePort {
         this.brandServicePort = brandServicePort;
     }
     @Override
-    public void saveBrand(Brand brand) {
+    public Brand saveBrand(Brand brand) {
         brandServicePort.saveBrand(brand);
+        return brand;
     }
 
     @Override

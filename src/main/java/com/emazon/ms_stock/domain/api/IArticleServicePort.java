@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface IArticleServicePort {
 
-    void saveArticle(Article article);
+    Article saveArticle(Article article);
     List<Article> getAllArticle();
     Article getArticle(Long id);
     void updateArticle(Article article);

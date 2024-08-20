@@ -13,8 +13,8 @@ public class CategoryUseCase implements ICategoryServicePort {
         this.categoryServicePort = categoryServicePort;
     }
     @Override
-    public void saveCategory(Category category) {
-        categoryServicePort.saveCategory(category);
+    public Category saveCategory(Category category) {
+        return categoryServicePort.saveCategory(category);
     }
 
     @Override

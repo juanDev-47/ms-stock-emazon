@@ -71,6 +71,9 @@ public class ArticleHandler implements IArticleHandler {
 
     @Override
     public void deleteArticle(Long id) {
-
+        Article article = articleServicePort.getArticle(id);
+        brandServicePort.deleteBrand(article.getId_brand());
+        categoryServicePort.deleteCategory(article.getId_category());
+        articleServicePort.deleteArticle(id);
     }
 }

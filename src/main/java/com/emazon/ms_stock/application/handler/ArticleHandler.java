@@ -25,7 +25,6 @@ public class ArticleHandler implements IArticleHandler {
     private final IArticleServicePort articleServicePort;
     private final IBrandServicePort brandServicePort;
     private final ICategoryServicePort categoryServicePort;
-    private final CategoryDTOMapper categoryDTOMapper;
     private final ArticleResponseMapper articleResponseMapper;
     private final ArticleRequestMapper articleRequestMapper;
 

@@ -10,7 +10,7 @@ import java.util.List;
 @Mapper(componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.IGNORE,
         unmappedSourcePolicy = ReportingPolicy.IGNORE)
-public class BrandEntityMapper {
+public interface BrandEntityMapper {
     BrandEntity toBrandEntity(Brand brand);
     List<Brand> toBrandList(List<BrandEntity> brands);
     Brand toBrand(BrandEntity brandEntity);

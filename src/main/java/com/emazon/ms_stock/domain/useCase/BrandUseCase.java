@@ -2,39 +2,40 @@ package com.emazon.ms_stock.domain.useCase;
 
 import com.emazon.ms_stock.domain.api.IBrandServicePort;
 import com.emazon.ms_stock.domain.model.Brand;
+import com.emazon.ms_stock.domain.spi.IBrandPersistencePort;
 
 import java.util.List;
 
 public class BrandUseCase implements IBrandServicePort {
 
-    private final IBrandServicePort brandServicePort;
+    private final IBrandPersistencePort brandPersistencePort;
 
-    public BrandUseCase(IBrandServicePort brandServicePort){
-        this.brandServicePort = brandServicePort;
+    public BrandUseCase(IBrandPersistencePort brandPersistencePort){
+        this.brandPersistencePort = brandPersistencePort;
     }
     @Override
     public Brand saveBrand(Brand brand) {
-        brandServicePort.saveBrand(brand);
+        brandPersistencePort.saveBrand(brand);
         return brand;
     }
 
     @Override
     public List<Brand> getAllBrand() {
-        return brandServicePort.getAllBrand();
+        return brandPersistencePort.getAllBrand();
     }
 
     @Override
     public Brand getBrand(Long id) {
-        return brandServicePort.getBrand(id);
+        return brandPersistencePort.getBrand(id);
     }
 
     @Override
     public void updateBrand(Brand brand) {
-        brandServicePort.updateBrand(brand);
+        brandPersistencePort.updateBrand(brand);
     }
 
     @Override
     public void deleteBrand(Long id) {
-        brandServicePort.deleteBrand(id);
+        brandPersistencePort.deleteBrand(id);
     }
 }

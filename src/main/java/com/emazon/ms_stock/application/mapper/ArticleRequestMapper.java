@@ -15,7 +15,9 @@ import org.mapstruct.ReportingPolicy;
 public interface ArticleRequestMapper {
     Article toArticle(ArticleRequest articleRequest);
 
+
     Brand toBrand(ArticleRequest articleRequest);
+
 
     Category toCategory(ArticleRequest articleRequest);
 

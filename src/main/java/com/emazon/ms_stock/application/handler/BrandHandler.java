@@ -14,13 +14,12 @@ import java.util.List;
 @RequiredArgsConstructor
 @Transactional
 public class BrandHandler implements IBrandHandler{
-    private IBrandServicePort brandServicePort;
-    private BrandDTOMapper brandDTOMapper;
+    private final IBrandServicePort brandServicePort;
+    private final BrandDTOMapper brandDTOMapper;
 
     @Override
     public void saveBrand(BrandDTO brand) {
-        Brand newBrand = brandDTOMapper.toEntity(brand);
-        brandServicePort.saveBrand(newBrand);
+        brandServicePort.saveBrand(brandDTOMapper.toEntity(brand));
     }
 
     @Override

@@ -13,16 +13,18 @@ import java.util.List;
 
 @RequiredArgsConstructor
 public class CategoryJpaAdapter implements ICategoryPersistencePort {
-    private final ICategoryRepository categoryRepository;
     private final CategoryEntityMapper categoryEntityMapper;
+    private final ICategoryRepository categoryRepository;
 
 
     @Override
-    public void saveCategory(Category category) {
-        if(categoryRepository.findCategoryEntitiesByName(category.getName()).isPresent() ){
+    public Category saveCategory(Category category_one) {
+        if(categoryRepository.findCategoryEntitiesByName(category_one.getName()).isPresent() ){
             throw new CategoryAlreadyExistException();
         }
-        categoryRepository.save(categoryEntityMapper.toEntity(category));
+        CategoryEntity categoryEntity = categoryEntityMapper.toEntity(category_one);
+        categoryRepository.save(categoryEntity);
+        return category_one;
     }
 
     @Override

@@ -28,21 +28,21 @@ public class ArticleHandler implements IArticleHandler {
     private final ArticleResponseMapper articleResponseMapper;
     private final ArticleRequestMapper articleRequestMapper;
 
+
     @Override
     public void saveArticle(ArticleRequest articleRequest) {
-        Brand brand = brandServicePort.saveBrand(articleRequestMapper.toBrand(articleRequest));
-        Category category = categoryServicePort.saveCategory(articleRequestMapper.toCategory(articleRequest));
+//        Brand brand = brandServicePort.saveBrand(articleRequestMapper.toBrand(articleRequest));
+//        Category category = categoryServicePort.saveCategory(articleRequestMapper.toCategory(articleRequest));
         Article article = articleRequestMapper.toArticle(articleRequest);
-        article.setId_brand(brand.getId());
-        article.setId_category(category.getId());
+//        article.setBrand(brand);
+//        article.setCategory(category);
         articleServicePort.saveArticle(article);
 
     }
 
     @Override
     public List<ArticleResponse> getAllArticle() {
-        List<Article> articles = articleServicePort.getAllArticle();
-        return articleResponseMapper.toDTOList(articles);
+        return articleResponseMapper.toDTOList(articleServicePort.getAllArticle(), categoryServicePort.getAllCategory(), brandServicePort.getAllBrand());
     }
 
     @Override
@@ -55,15 +55,13 @@ public class ArticleHandler implements IArticleHandler {
     public void updateArticle(ArticleRequest article) {
         Article oldArticle = articleServicePort.getArticle(article.getId());
         Brand newBrand = articleRequestMapper.toBrand(article);
-        newBrand.setId(oldArticle.getId_brand());
+        newBrand.setId(oldArticle.getBrand().getId());
         brandServicePort.updateBrand(newBrand);
         Category newCategory = articleRequestMapper.toCategory(article);
-        newCategory.setId(oldArticle.getId_category());
+        newCategory.setId(oldArticle.getCategory().getId());
         categoryServicePort.updateCategory(newCategory);
         Article newArticle = articleRequestMapper.toArticle(article);
         newArticle.setId(oldArticle.getId());
-        newArticle.setId_category(oldArticle.getId_category());
-        newArticle.setId_brand(oldArticle.getId_brand());
         articleServicePort.updateArticle(newArticle);
 
     }
@@ -71,8 +69,8 @@ public class ArticleHandler implements IArticleHandler {
     @Override
     public void deleteArticle(Long id) {
         Article article = articleServicePort.getArticle(id);
-        brandServicePort.deleteBrand(article.getId_brand());
-        categoryServicePort.deleteCategory(article.getId_category());
+        brandServicePort.deleteBrand(article.getBrand().getId());
+        categoryServicePort.deleteCategory(article.getCategory().getId());
         articleServicePort.deleteArticle(id);
     }
 }

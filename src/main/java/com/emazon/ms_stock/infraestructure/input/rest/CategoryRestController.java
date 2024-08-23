@@ -26,4 +26,10 @@ public class CategoryRestController {
         return ResponseEntity.ok(categoryHandler.getAllCategories());
     }
 
+    @PutMapping
+    public ResponseEntity<Void> updateCategory(@RequestBody CategoryDTO category){
+        categoryHandler.updateCategory(category);
+        return ResponseEntity.noContent().build();
+    }
+
 }

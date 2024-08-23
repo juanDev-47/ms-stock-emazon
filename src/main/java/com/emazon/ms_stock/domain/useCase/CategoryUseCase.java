@@ -2,38 +2,39 @@ package com.emazon.ms_stock.domain.useCase;
 
 import com.emazon.ms_stock.domain.api.ICategoryServicePort;
 import com.emazon.ms_stock.domain.model.Category;
+import com.emazon.ms_stock.domain.spi.ICategoryPersistencePort;
 
 import java.util.List;
 
 public class CategoryUseCase implements ICategoryServicePort {
 
-    private final ICategoryServicePort categoryServicePort;
+    private final ICategoryPersistencePort categoryPersistencePort;
 
-    public CategoryUseCase(ICategoryServicePort categoryServicePort){
-        this.categoryServicePort = categoryServicePort;
+    public CategoryUseCase(ICategoryPersistencePort categoryPersistencePort){
+        this.categoryPersistencePort = categoryPersistencePort;
     }
     @Override
     public Category saveCategory(Category category) {
-        return categoryServicePort.saveCategory(category);
+        return categoryPersistencePort.saveCategory(category);
     }
 
     @Override
     public List<Category> getAllCategory() {
-        return categoryServicePort.getAllCategory();
+        return categoryPersistencePort.getAllCategory();
     }
 
     @Override
     public Category getCategory(Long id) {
-        return categoryServicePort.getCategory(id);
+        return categoryPersistencePort.getCategory(id);
     }
 
     @Override
     public void updateCategory(Category category) {
-        categoryServicePort.updateCategory(category);
+        categoryPersistencePort.updateCategory(category);
     }
 
     @Override
     public void deleteCategory(Long id) {
-        categoryServicePort.deleteCategory(id);
+        categoryPersistencePort.deleteCategory(id);
     }
 }

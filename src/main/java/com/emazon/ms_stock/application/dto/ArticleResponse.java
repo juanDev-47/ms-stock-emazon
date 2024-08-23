@@ -9,6 +9,8 @@ import java.math.BigDecimal;
 @Setter
 public class ArticleResponse {
     private Long id;
+    private String name;
+    private String description;
     private Integer amount;
     private BigDecimal price;
     private BrandDTO brand;

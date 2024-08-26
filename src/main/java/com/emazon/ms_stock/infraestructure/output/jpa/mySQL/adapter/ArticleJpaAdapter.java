@@ -4,6 +4,7 @@ import com.emazon.ms_stock.domain.model.Article;
 import com.emazon.ms_stock.domain.spi.IArticlePersistencePort;
 import com.emazon.ms_stock.infraestructure.exception.ArticleAlreadyExistException;
 import com.emazon.ms_stock.infraestructure.exception.ArticleNotFoundException;
+import com.emazon.ms_stock.infraestructure.exception.BrandAlreadyExistException;
 import com.emazon.ms_stock.infraestructure.output.jpa.mySQL.Entity.ArticleEntity;
 import com.emazon.ms_stock.infraestructure.output.jpa.mySQL.Mapper.ArticleEntityMapper;
 import com.emazon.ms_stock.infraestructure.output.jpa.mySQL.repository.IArticleRepository;
@@ -18,6 +19,9 @@ public class ArticleJpaAdapter implements IArticlePersistencePort {
 
     @Override
     public Article saveArticle(Article article) {
+        if(articleRepository.findArticleEntitiesByName(article.getName()).isPresent()){
+            throw new ArticleAlreadyExistException();
+        }
         return articleEntityMapper.toArticle(articleRepository.save(articleEntityMapper.toEntity(article)));
     }
 

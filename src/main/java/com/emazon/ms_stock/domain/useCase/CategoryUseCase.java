@@ -3,6 +3,7 @@ package com.emazon.ms_stock.domain.useCase;
 import com.emazon.ms_stock.domain.api.ICategoryServicePort;
 import com.emazon.ms_stock.domain.model.Category;
 import com.emazon.ms_stock.domain.spi.ICategoryPersistencePort;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -15,12 +16,13 @@ public class CategoryUseCase implements ICategoryServicePort {
     }
     @Override
     public Category saveCategory(Category category) {
+        category.setName(category.getName().toLowerCase());
         return categoryPersistencePort.saveCategory(category);
     }
 
     @Override
-    public List<Category> getAllCategory() {
-        return categoryPersistencePort.getAllCategory();
+    public List<Category> getAllCategory(Integer page, Integer size, String order) {
+        return categoryPersistencePort.getAllCategory(page, size, order);
     }
 
     @Override

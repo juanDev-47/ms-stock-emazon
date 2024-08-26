@@ -8,6 +8,9 @@ import com.emazon.ms_stock.infraestructure.output.jpa.mySQL.Entity.CategoryEntit
 import com.emazon.ms_stock.infraestructure.output.jpa.mySQL.Mapper.CategoryEntityMapper;
 import com.emazon.ms_stock.infraestructure.output.jpa.mySQL.repository.ICategoryRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 
@@ -28,8 +31,10 @@ public class CategoryJpaAdapter implements ICategoryPersistencePort {
     }
 
     @Override
-    public List<Category> getAllCategory() {
-        List<CategoryEntity> categoryEntityList = categoryRepository.findAll();
+    public List<Category> getAllCategory(Integer page, Integer size, String order) {
+        Sort sort = Sort.by(order.equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC, "name");
+        Pageable pagination = PageRequest.of(page, size, sort);
+        List<CategoryEntity> categoryEntityList = categoryRepository.findAll(pagination).getContent();
         if(categoryEntityList.isEmpty()){
             throw new CategoryNotFoundException();
         }

@@ -28,7 +28,7 @@ public interface ArticleResponseMapper {
     @InheritInverseConfiguration
     Article toEntity(ArticleResponse dto);
 
-    default List<ArticleResponse> toDTOList(List<Article> articles, List<Category> categories, List<Brand> brands){
+    default List<ArticleResponse> toDTOList(List<Article> articles, List<Brand> brands){
         return articles.stream()
                 .map(article -> {
                     ArticleResponse articleResponse = new ArticleResponse();

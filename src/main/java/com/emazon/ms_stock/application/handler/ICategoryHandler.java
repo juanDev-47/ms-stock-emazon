@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ICategoryHandler {
     void saveCategory(CategoryDTO category);
-    List<CategoryDTO> getAllCategories();
+    List<CategoryDTO> getAllCategories(Integer page, Integer size, String order);
     CategoryDTO getCategory(Long id);
     void updateCategory(CategoryDTO Category);
     void deleteCategory(Long id);

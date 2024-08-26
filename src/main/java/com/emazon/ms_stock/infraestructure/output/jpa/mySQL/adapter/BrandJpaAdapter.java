@@ -8,6 +8,9 @@ import com.emazon.ms_stock.infraestructure.output.jpa.mySQL.Entity.BrandEntity;
 import com.emazon.ms_stock.infraestructure.output.jpa.mySQL.Mapper.BrandEntityMapper;
 import com.emazon.ms_stock.infraestructure.output.jpa.mySQL.repository.IBrandRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 
@@ -25,8 +28,10 @@ public class BrandJpaAdapter implements IBrandPersistencePort{
     }
 
     @Override
-    public List<Brand> getAllBrand() {
-        List<BrandEntity> brands = brandRepository.findAll();
+    public List<Brand> getAllBrand(Integer page, Integer size, String order) {
+        Sort sort = Sort.by(order.equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC, "name");
+        Pageable pagination = PageRequest.of(page, size, sort);
+        List<BrandEntity> brands = brandRepository.findAll(pagination).getContent();
         if(brands.isEmpty()){
             throw new BrandNotFoundException();
         }

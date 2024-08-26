@@ -23,8 +23,8 @@ public class BrandHandler implements IBrandHandler{
     }
 
     @Override
-    public List<BrandDTO> getAllArticle() {
-        List<Brand> brands = brandServicePort.getAllBrand();
+    public List<BrandDTO> getAllBrand(Integer page, Integer size, String order) {
+        List<Brand> brands = brandServicePort.getAllBrand(page, size, order);
         return brandDTOMapper.toDtoList(brands);
     }
 

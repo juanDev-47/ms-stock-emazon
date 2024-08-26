@@ -38,7 +38,10 @@ public class ArticleHandler implements IArticleHandler {
 
     @Override
     public List<ArticleResponse> getAllArticle() {
-        return articleResponseMapper.toDTOList(articleServicePort.getAllArticle(), brandServicePort.getAllBrand());
+        Integer page = 0;
+        Integer size = 3;
+        String order = "asc";
+        return articleResponseMapper.toDTOList(articleServicePort.getAllArticle(), brandServicePort.getAllBrand(page, size, order));
     }
 
     @Override

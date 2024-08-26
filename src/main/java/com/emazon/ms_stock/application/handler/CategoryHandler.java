@@ -24,8 +24,8 @@ public class CategoryHandler implements ICategoryHandler{
     }
 
     @Override
-    public List<CategoryDTO> getAllCategories() {
-        List<Category> categories = categoryServicePort.getAllCategory();
+    public List<CategoryDTO> getAllCategories(Integer page, Integer size, String order) {
+        List<Category> categories = categoryServicePort.getAllCategory(page, size, order);
         return categoryDTOMapper.toDtoList(categories);
     }
 

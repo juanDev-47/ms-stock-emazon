@@ -31,18 +31,14 @@ public class ArticleHandler implements IArticleHandler {
 
     @Override
     public void saveArticle(ArticleRequest articleRequest) {
-//        Brand brand = brandServicePort.saveBrand(articleRequestMapper.toBrand(articleRequest));
-//        Category category = categoryServicePort.saveCategory(articleRequestMapper.toCategory(articleRequest));
         Article article = articleRequestMapper.toArticle(articleRequest);
-//        article.setBrand(brand);
-//        article.setCategory(category);
         articleServicePort.saveArticle(article);
 
     }
 
     @Override
     public List<ArticleResponse> getAllArticle() {
-        return articleResponseMapper.toDTOList(articleServicePort.getAllArticle(), categoryServicePort.getAllCategory(), brandServicePort.getAllBrand());
+        return articleResponseMapper.toDTOList(articleServicePort.getAllArticle(), brandServicePort.getAllBrand());
     }
 
     @Override

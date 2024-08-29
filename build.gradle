@@ -55,6 +55,8 @@ def jacocoExclude = [
 		'**/model/*.class',
 		'**/entity/*.class',
 		'**/dto/*.class',
+		'**/mapper/response/*.class',
+		'**/mapper/request/*.class',
 ]
 
 test {

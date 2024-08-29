@@ -13,6 +13,7 @@ import com.emazon.stock.domain.spi.ProductPersistencePort;
 import com.emazon.stock.domain.utils.DomainConstants;
 import com.emazon.stock.domain.utils.pagination.DomainPage;
 import com.emazon.stock.domain.utils.pagination.PaginationData;
+import io.swagger.v3.core.util.Json;
 
 import java.util.HashSet;
 import java.util.List;

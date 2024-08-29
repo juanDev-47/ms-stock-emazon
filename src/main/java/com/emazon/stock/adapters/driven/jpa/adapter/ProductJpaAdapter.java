@@ -9,6 +9,7 @@ import com.emazon.stock.domain.model.Product;
 import com.emazon.stock.domain.spi.ProductPersistencePort;
 import com.emazon.stock.domain.utils.pagination.DomainPage;
 import com.emazon.stock.domain.utils.pagination.PaginationData;
+import io.swagger.v3.core.util.Json;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -31,6 +32,7 @@ public class ProductJpaAdapter implements ProductPersistencePort {
     public DomainPage<Product> getAllProducts(PaginationData paginationData) {
         Pageable pageable = paginationJPAMapper.toJPA(paginationData).createPageable();
         Page<ProductEntity> returnProducts = productRepository.findAll(pageable);
+        System.out.println(Json.pretty(returnProducts));
         return productEntityMapper.toDomainPage(returnProducts);
     }
 

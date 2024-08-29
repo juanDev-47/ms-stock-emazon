@@ -31,7 +31,7 @@ public class BrandEntity {
     @Column(name = "description", nullable = false, length = 127)
     private String description;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "brand", cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "brand")
     @JsonIgnore
     private List<ProductEntity> products;
 }

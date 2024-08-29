@@ -15,17 +15,12 @@ import java.util.List;
         unmappedSourcePolicy = ReportingPolicy.IGNORE,
         unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface BrandEntityMapper {
+    @Mapping(target = "products", ignore = true)
     BrandEntity toEntity(Brand brand);
-
-    Brand toBrand(BrandEntity brandEntity);
 
     @Named("brandWithoutProducts")
     @Mapping(target = "products", ignore = true)
-    Brand withoutProducts(BrandEntity source);
-
-    @Mapping(target = "categories", ignore = true)
-    @Mapping(target = "brand", ignore = true)
-    Product toProduct(ProductEntity productEntity);
+    Brand toBrand(BrandEntity brandEntity);
 
     @IterableMapping(qualifiedByName = "brandWithoutProducts")
     List<Brand> toBrands(List<BrandEntity> brandEntities);
@@ -36,6 +31,5 @@ public interface BrandEntityMapper {
     @Mapping(target = "count", source = "numberOfElements")
     @Mapping(target = "totalCount", source = "totalElements")
     @Mapping(target = "content", source = "content")
-    @IterableMapping(qualifiedByName = "brandWithoutProducts")
     DomainPage<Brand> toDomainPage(Page<BrandEntity> brandEntities);
 }

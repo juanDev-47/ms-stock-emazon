@@ -1,6 +1,7 @@
 package com.emazon.stock.adapters.driving.rest.mapper.response;
 
 
+import com.emazon.stock.adapters.driving.rest.dto.response.CategoryResponse;
 import com.emazon.stock.adapters.driving.rest.dto.response.PageResponse;
 import com.emazon.stock.adapters.driving.rest.dto.response.ProductResponse;
 import com.emazon.stock.domain.model.Product;
@@ -18,6 +19,7 @@ public interface ProductResponseMapper {
     ProductResponse toResponse(Product product);
 
     List<ProductResponse> toList(List<Product> products);
+
 
 
     PageResponse<ProductResponse> toPageResponse(DomainPage<Product> products);

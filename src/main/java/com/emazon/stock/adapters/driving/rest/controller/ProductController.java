@@ -2,6 +2,7 @@ package com.emazon.stock.adapters.driving.rest.controller;
 
 import com.emazon.stock.adapters.driving.rest.dto.request.PaginationRequest;
 import com.emazon.stock.adapters.driving.rest.dto.request.ProductRequest;
+import com.emazon.stock.adapters.driving.rest.dto.response.CategoryResponse;
 import com.emazon.stock.adapters.driving.rest.dto.response.PageResponse;
 import com.emazon.stock.adapters.driving.rest.dto.response.ProductResponse;
 import com.emazon.stock.adapters.driving.rest.service.ProductService;
@@ -15,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -49,6 +51,15 @@ public class ProductController {
         PaginationRequest paginationRequest = new PaginationRequest(params);
         foundProducts = productService.getAllProducts(paginationRequest);
         return ResponseEntity.ok(foundProducts);
+    }
+
+    @Operation(summary = "Get all products using its category id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "A list of the found products by categoryID", content = @Content)
+    })
+    @GetMapping("productByCategory/{id}")
+    public ResponseEntity<List<ProductResponse>> getAllProducts(@PathVariable Long id){
+        return ResponseEntity.ok(productService.getProductCategories(id));
     }
 
 }

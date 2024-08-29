@@ -2,7 +2,7 @@ package com.emazon.stock.adapters.driving.rest.dto.response;
 
 import lombok.*;
 
-@Data
+
 @Builder
 @Getter
 @Setter

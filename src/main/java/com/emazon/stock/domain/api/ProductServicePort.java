@@ -10,5 +10,5 @@ import java.util.List;
 public interface ProductServicePort {
     void save(Product product);
     DomainPage<Product> getAllProducts(PaginationData paginationData);
-    List<Category> getProductCategories(Long id);
+    List<Product> getProductCategories(Long id);
 }

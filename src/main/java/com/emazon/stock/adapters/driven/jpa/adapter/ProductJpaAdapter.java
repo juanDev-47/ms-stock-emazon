@@ -32,13 +32,12 @@ public class ProductJpaAdapter implements ProductPersistencePort {
     public DomainPage<Product> getAllProducts(PaginationData paginationData) {
         Pageable pageable = paginationJPAMapper.toJPA(paginationData).createPageable();
         Page<ProductEntity> returnProducts = productRepository.findAll(pageable);
-        System.out.println(Json.pretty(returnProducts));
         return productEntityMapper.toDomainPage(returnProducts);
     }
 
     @Override
-    public List<Category> getProductCategories(Long id) {
+    public List<Product> getProductCategories(Long id) {
         // TODO: UH6
-        return List.of();
+        return productEntityMapper.toProducts(productRepository.findProductEntitiesByCategories(id));
     }
 }

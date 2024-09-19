@@ -64,4 +64,5 @@ public class BeanConfiguration {
         return new ProductUseCase(productPersistencePort(), categoryPersistencePort(), brandPersistencePort());
     }
 
+
   }

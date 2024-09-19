@@ -12,9 +12,11 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
+
 
 @RestController
 @RequestMapping("/brands")
@@ -31,6 +33,7 @@ public class BrandController {
             @ApiResponse(responseCode = "400", description = "Brand description is too long", content = @Content)
     })
     @PostMapping
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     public ResponseEntity<BrandResponse> createBrand(@RequestBody BrandRequest brandRequest) {
         brandService.save(brandRequest);
         return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -41,6 +44,7 @@ public class BrandController {
             @ApiResponse(responseCode = "200", description = "A list of the found brands", content = @Content),
     })
     @GetMapping
+    @PreAuthorize("hasAnyRole('ROLE_AUX_BODEGA','ROLE_ADMIN','ROLE_USER')")
     public ResponseEntity<PageResponse<BrandResponse>> getAll(@RequestParam Map<String, String> query) {
         PageResponse<BrandResponse> foundBrands;
         PaginationRequest paginationRequest = new PaginationRequest(query);

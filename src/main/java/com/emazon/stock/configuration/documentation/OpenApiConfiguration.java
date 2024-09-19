@@ -1,4 +1,4 @@
-package com.emazon.stock.configuration;
+package com.emazon.stock.configuration.documentation;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;

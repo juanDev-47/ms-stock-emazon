@@ -1,7 +1,9 @@
 package com.emazon.stock.adapters.driving.rest.mapper.request;
 
 
+import com.emazon.stock.adapters.driving.rest.dto.request.AddSuppliesRequestDTO;
 import com.emazon.stock.adapters.driving.rest.dto.request.ProductRequest;
+import com.emazon.stock.domain.dto.request.AddSuppliesDTO;
 import com.emazon.stock.domain.model.Product;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
@@ -11,4 +13,6 @@ import org.mapstruct.ReportingPolicy;
         unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface ProductRequestMapper {
     Product toProduct(ProductRequest productRequest);
+
+    AddSuppliesDTO toAddSupplies(AddSuppliesRequestDTO addSuppliesRequestDTO);
 }

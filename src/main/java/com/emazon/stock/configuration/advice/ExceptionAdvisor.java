@@ -27,6 +27,16 @@ public class ExceptionAdvisor {
         return ResponseEntity.status(exceptionResponse.getStatusCode()).body(exceptionResponse);
     }
 
+    @ExceptionHandler(StackOverflowError.class)
+    public ResponseEntity<ExceptionResponse> handleStackOverflowError(RuntimeException e) {
+        ExceptionResponse exceptionResponse = ExceptionResponse.builder()
+                .statusCode(HttpStatus.NOT_FOUND.value())
+                .status(HttpStatus.NOT_FOUND)
+                .timestamp(LocalDateTime.now())
+                .message(e.getMessage()).build();
+        return ResponseEntity.status(exceptionResponse.getStatusCode()).body(exceptionResponse);
+    }
+
     @ExceptionHandler({
             EmptyFieldException.class,
             OutOfBoundsException.class,

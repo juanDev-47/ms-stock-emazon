@@ -41,17 +41,16 @@ public class ProductEntity {
     @Column(name = "quantity", nullable = false)
     private Long quantity;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "product_category",
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
     @NotNull
-    @Size(max = 3, min = 1)
     private Set<CategoryEntity> categories;
 
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="brand_id")
     private BrandEntity brand;
 }

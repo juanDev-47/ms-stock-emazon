@@ -4,12 +4,12 @@ package com.emazon.stock.adapters.driven.jpa.mapper;
 import com.emazon.stock.domain.model.Category;
 import com.emazon.stock.adapters.driven.jpa.entity.CategoryEntity;
 import com.emazon.stock.domain.utils.pagination.DomainPage;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.ReportingPolicy;
+import org.mapstruct.*;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring",
         unmappedSourcePolicy = ReportingPolicy.IGNORE,
@@ -18,9 +18,11 @@ public interface CategoryEntityMapper {
     @Mapping(target = "products", ignore = true)
     CategoryEntity toEntity(Category category);
 
+    @Named("toCategoryWithoutProducts")
     @Mapping(target = "products", ignore = true)
     Category toCategory(CategoryEntity categoryEntity);
 
+    @IterableMapping(qualifiedByName = "toCategoryWithoutProducts")
     List<Category> toCategories(List<CategoryEntity> categoryEntities);
 
     @Mapping(target = "page", source = "number")

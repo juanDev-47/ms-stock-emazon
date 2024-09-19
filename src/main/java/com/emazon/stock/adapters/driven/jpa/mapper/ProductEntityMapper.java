@@ -1,8 +1,10 @@
 package com.emazon.stock.adapters.driven.jpa.mapper;
 
 
+import com.emazon.stock.adapters.driven.jpa.entity.BrandEntity;
 import com.emazon.stock.adapters.driven.jpa.entity.CategoryEntity;
 import com.emazon.stock.adapters.driven.jpa.entity.ProductEntity;
+import com.emazon.stock.domain.model.Brand;
 import com.emazon.stock.domain.model.Category;
 import com.emazon.stock.domain.model.Product;
 import com.emazon.stock.domain.utils.pagination.DomainPage;
@@ -13,10 +15,13 @@ import java.util.List;
 
 @Mapper(componentModel = "spring",
         unmappedSourcePolicy = ReportingPolicy.IGNORE,
-        unmappedTargetPolicy = ReportingPolicy.IGNORE)
+        unmappedTargetPolicy = ReportingPolicy.IGNORE, uses = {CategoryEntityMapper.class, BrandEntityMapper.class})
 public interface ProductEntityMapper {
+
     ProductEntity toEntity(Product product);
 
+    @Mapping(target = "categories", qualifiedByName = "toCategoryWithoutProducts")
+    @Mapping(target = "brand", qualifiedByName = "brandWithoutProducts")
     Product toProduct(ProductEntity productEntity);
 
     List<Product> toProducts(List<ProductEntity> productEntities);
@@ -29,3 +34,4 @@ public interface ProductEntityMapper {
     @Mapping(target = "content", source = "content")
     DomainPage<Product> toDomainPage(Page<ProductEntity> productEntities);
 }
+

@@ -15,3 +15,14 @@ logging:
         web: trace
         org:
             springframework:
+
+jwt:
+    secret_key: ${secret_key}
+
+allowed-origins:
+    http://localhost:3000/,
+    *,
+
+emazon:
+    user:
+        base-url: localhost:8090

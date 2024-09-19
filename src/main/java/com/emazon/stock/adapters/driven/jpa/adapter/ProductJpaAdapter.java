@@ -4,6 +4,7 @@ import com.emazon.stock.adapters.driven.jpa.entity.ProductEntity;
 import com.emazon.stock.adapters.driven.jpa.mapper.ProductEntityMapper;
 import com.emazon.stock.adapters.driven.jpa.mapper.PaginationJPAMapper;
 import com.emazon.stock.adapters.driven.jpa.persistence.ProductRepository;
+import com.emazon.stock.domain.dto.request.AddSuppliesDTO;
 import com.emazon.stock.domain.model.Category;
 import com.emazon.stock.domain.model.Product;
 import com.emazon.stock.domain.spi.ProductPersistencePort;
@@ -15,6 +16,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 public class ProductJpaAdapter implements ProductPersistencePort {
@@ -36,8 +38,13 @@ public class ProductJpaAdapter implements ProductPersistencePort {
     }
 
     @Override
-    public List<Product> getProductCategories(Long id) {
-        // TODO: UH6
-        return productEntityMapper.toProducts(productRepository.findProductEntitiesByCategories(id));
+    public void addSupplies(AddSuppliesDTO addSuppliesDTO) {
+        Optional<ProductEntity> product = productRepository.findById(addSuppliesDTO.getProductId());
+
+        product.ifPresent(productEntity -> {
+            productEntity.setQuantity( ( productEntity.getQuantity() + addSuppliesDTO.getAmountProduct() ) );
+            productRepository.save(productEntity);
+        });
     }
+
 }

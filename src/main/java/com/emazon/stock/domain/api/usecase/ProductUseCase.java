@@ -1,6 +1,7 @@
 package com.emazon.stock.domain.api.usecase;
 
 import com.emazon.stock.domain.api.ProductServicePort;
+import com.emazon.stock.domain.dto.request.AddSuppliesDTO;
 import com.emazon.stock.domain.exceptions.DuplicatedProductCategoryException;
 import com.emazon.stock.domain.exceptions.EmptyFieldException;
 import com.emazon.stock.domain.exceptions.NotEnoughCategoriesException;
@@ -67,7 +68,8 @@ public class ProductUseCase implements ProductServicePort {
     }
 
     @Override
-    public List<Product> getProductCategories(Long id) {
-        return productPersistencePort.getProductCategories(id);
+    public void addSupplies(AddSuppliesDTO addSuppliesDTO) {
+        productPersistencePort.addSupplies(addSuppliesDTO);
     }
+
 }
